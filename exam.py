@@ -63,6 +63,15 @@ class Szalloda:
             print(
                 f"{i}. Szoba: {foglalas.szoba.szobaszam}, Dátum: {foglalas.datum.strftime('%Y-%m-%d')}, Ár: {foglalas.szoba.ar} Ft")
 
+    def szobak_listazasa(self):
+        print("\nElérhető szobák:")
+        for szoba in self.szobak:
+            if isinstance(szoba, EgyagyasSzoba):
+                print(
+                    f"Egyágyas szoba {szoba.szobaszam}: Ár: {szoba.ar} Ft, Méret: {szoba.meret}, Minibar: {szoba.minibar}, Erkély: {szoba.erkely}")
+            elif isinstance(szoba, KetagyasSzoba):
+                print(
+                    f"Kétágyas szoba {szoba.szobaszam}: Ár: {szoba.ar} Ft, Méret: {szoba.meret}, Minibar: {szoba.minibar}, Erkély: {szoba.erkely}")
 
 def feltoltes():
     szalloda = Szalloda("Hotel California")
@@ -88,12 +97,13 @@ def main():
         print("1. Foglalás")
         print("2. Foglalás lemondása")
         print("3. Aktív foglalások listázása")
-        print("4. Kilépés")
+        print("4. Szobák listázása")
+        print("5. Kilépés")
+
 
         valasztas = input("Választás: ")
 
         if valasztas == "1":
-            os.system('cls' if os.name == 'nt' else 'clear')  # Törölje a képernyőt
 
             print("\nVálasztható szobák:")
             for szoba in szalloda.szobak:
@@ -115,7 +125,6 @@ def main():
                 print("Hiba: Érvénytelen szoba szám. Kérem, próbálja újra.")
 
         elif valasztas == "2":
-            os.system('cls' if os.name == 'nt' else 'clear')  # Törölje a képernyőt
 
             szalloda.foglalasok_listazasa()
 
@@ -131,11 +140,12 @@ def main():
                 print("Hiba: Érvénytelen sorszám. Kérem, próbálja újra.")
 
         elif valasztas == "3":
-            os.system('cls' if os.name == 'nt' else 'clear')  # Törölje a képernyőt
-
-            szalloda.foglalasok_listazasa()
+           szalloda.foglalasok_listazasa()
 
         elif valasztas == "4":
+           szalloda.szobak_listazasa()
+
+        elif valasztas == "5":
             break
 
         else:
